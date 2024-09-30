@@ -1,14 +1,10 @@
-public class Student {
-    private String _Name;
-    private String _SurName;
-    private String _Patronymic;
+public class Student extends Person{
+
     private double _averageGrade;
     private double _attendance;
 
     public Student(String Name,String SurName, String Patronymic, double averageGrade, double attendance){
-        this._Name = Name;
-        this._SurName = SurName;
-        this._Patronymic = Patronymic;
+        super(Name,SurName,Patronymic);
         this._averageGrade = averageGrade;
         this._attendance = attendance;
     }
