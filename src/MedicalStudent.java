@@ -1,21 +1,11 @@
 import java.util.ArrayList;
 import java.math.BigDecimal;
 public class MedicalStudent extends Student {
-
     private String _specialization; // специализация (хирург, терапевт и т.д.)
     private String _studytype; // теоретик или практик
     private boolean _hasaccesstopractice; // имеет ли доступ к практике (находиться на операциях и т.д.)
     private int _hoursofpractice; // общее время в часах работы в больнице
     private boolean _hasemergencyexperience; // имеет ли опыт работы в экстренных ситуациях
-
-    public MedicalStudent() {
-        super();
-        _specialization = null;
-        _studytype = null;
-        _hasaccesstopractice = false;
-        _hoursofpractice = 0;
-        _hasemergencyexperience = false;
-    }
 
     public MedicalStudent(String fullname, String gender, int age, String countryofbirth, String phonenumber,
                           String studentID, int yearofstudy, int absences, BigDecimal gpa, String hasScholarship,
@@ -29,79 +19,58 @@ public class MedicalStudent extends Student {
         this._hasemergencyexperience = hasemergencyexperience;
     }
 
-    public String getSpecialization() {
+    public String get_specialization() {
         return _specialization;
     }
 
-    public void setSpecialization(String specialization) {
-        this._specialization = specialization;
+    public void set_specialization(String _specialization) {
+        this._specialization = _specialization;
     }
 
-    public String getStudytype() {
+
+    public String get_studytype() {
         return _studytype;
     }
 
-    public void setStudytype(String studytype) {
-        this._studytype = studytype;
+    public void set_studytype(String _studytype) {
+        this._studytype = _studytype;
     }
 
-    public boolean hasAccessToPractice() {
+
+    public boolean is_hasaccesstopractice() {
         return _hasaccesstopractice;
     }
 
-    public void setAccessToPractice(boolean hasaccesstopractice) {
-        this._hasaccesstopractice = hasaccesstopractice;
+    public void set_hasaccesstopractice(boolean _hasaccesstopractice) {
+        this._hasaccesstopractice = _hasaccesstopractice;
     }
 
-    public int getHoursOfPractice() {
+
+    public int get_hoursofpractice() {
         return _hoursofpractice;
     }
 
-    public void setHoursOfPractice(int hoursofpractice) {
-        if (hoursofpractice < 0) {
-            throw new IllegalArgumentException("Часы практики не могут быть отрицательными");
-        }
-        this._hoursofpractice = hoursofpractice;
+    public void set_hoursofpractice(int _hoursofpractice) {
+        this._hoursofpractice = _hoursofpractice;
     }
 
-    public boolean hasEmergencyExperience() {
+
+    public boolean is_hasemergencyexperience() {
         return _hasemergencyexperience;
     }
 
-    public void setEmergencyExperience(boolean hasemergencyexperience) {
-        this._hasemergencyexperience = hasemergencyexperience;
+    public void set_hasemergencyexperience(boolean _hasemergencyexperience) {
+        this._hasemergencyexperience = _hasemergencyexperience;
     }
 
-    public void conductResearch() {
-        System.out.println("Conducting medical research.");
-    }
 
-    public void attendResidency() {
-        if (_hasaccesstopractice) {
-            System.out.println("Attending residency.");
-        } else {
-            System.out.println("Not allowed to practice.");
-        }
-    }
-
-    public void treatPatients() {
-        System.out.println("Treating patients.");
-    }
-
-    public void performSurgery() {
-        if (_specialization.equalsIgnoreCase("хирург")) {
-            System.out.println("Performing surgery.");
-        } else {
-            System.out.println("Not specialized in surgery.");
-        }
-    }
-
-    public void handleEmergency() {
-        if (_hasemergencyexperience) {
-            System.out.println("Handling emergency situation.");
-        } else {
-            System.out.println("No experience in emergency situations.");
-        }
+    public MedicalStudent() {
+        super();
+        _specialization = null;
+        _studytype = null;
+        _hasaccesstopractice = false;
+        _hoursofpractice = 0;
+        _hasemergencyexperience = false;
     }
 
     @Override
