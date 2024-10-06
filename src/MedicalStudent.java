@@ -7,6 +7,15 @@ public class MedicalStudent extends Student {
     private int _hoursofpractice; // общее время в часах работы в больнице
     private boolean _hasemergencyexperience; // имеет ли опыт работы в экстренных ситуациях
 
+    public MedicalStudent() {
+        super();
+        _specialization = null;
+        _studytype = null;
+        _hasaccesstopractice = false;
+        _hoursofpractice = 0;
+        _hasemergencyexperience = false;
+    }
+
     public MedicalStudent(String fullname, String gender, int age, String countryofbirth, String phonenumber,
                           String studentID, int yearofstudy, int absences, BigDecimal gpa, String hasScholarship,
                           String specialization, String studytype, boolean hasaccesstopractice, int hoursofpractice,
@@ -61,16 +70,6 @@ public class MedicalStudent extends Student {
 
     public void set_hasemergencyexperience(boolean _hasemergencyexperience) {
         this._hasemergencyexperience = _hasemergencyexperience;
-    }
-
-
-    public MedicalStudent() {
-        super();
-        _specialization = null;
-        _studytype = null;
-        _hasaccesstopractice = false;
-        _hoursofpractice = 0;
-        _hasemergencyexperience = false;
     }
 
     @Override
