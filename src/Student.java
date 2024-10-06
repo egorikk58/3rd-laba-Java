@@ -28,7 +28,7 @@ public class Student extends Person{
         validateYearofstudy(yearofstudy);
         validateAbsences(absences);
         validateGpa(gpa);
-        validateSchoolarship(hasScholarship);
+        validateScholarship(hasScholarship);
         this._studentID = studentID;
         this._yearofstudy = yearofstudy;
         this._absences = absences;
@@ -36,33 +36,33 @@ public class Student extends Person{
         this._hasScholarship = hasScholarship.equalsIgnoreCase("да");
     }
 
-    private void validateStudentID(String studentID){
-        if(studentID.isEmpty() || !studentID.matches("^\\d{2}[А-Яа-яЁё]{2,3}\\d{3}$")){
+    public static void validateStudentID(String studentID) {
+        if (studentID.isEmpty() || !studentID.matches("^\\d{2}[А-Яа-яЁё]{2,3}\\d{3}$")) {
             throw new IllegalArgumentException("Вы ввели некорректный номер зачетной книжки");
         }
     }
 
-    private void validateYearofstudy(int year){
-        if(year>6 || year<=0){
+    public static void validateYearofstudy(int year) {
+        if (year > 6 || year <= 0) {
             throw new IllegalArgumentException("Вы ввели некорректный номер курса");
         }
     }
 
-    private void validateAbsences(int absences){
-        if(absences<0){
+    public static void validateAbsences(int absences) {
+        if (absences < 0) {
             throw new IllegalArgumentException("Вы ввели некорректное количество пропусков");
         }
     }
 
-    private void validateGpa(BigDecimal gpa) {
+    public static void validateGpa(BigDecimal gpa) {
         if (gpa.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("Вы ввели некорректное значение среднего балла");
         }
     }
 
-    private void validateSchoolarship(String hasschoolarship){
-        if(hasschoolarship.isEmpty() || !hasschoolarship.toLowerCase().matches("^(да|нет)$")){
-            throw new IllegalArgumentException("Вы ввели некорректно указали информацию о стипендии студента");
+    public static void validateScholarship(String hasScholarship) {
+        if (hasScholarship.isEmpty() || !hasScholarship.toLowerCase().matches("^(да|нет)$")) {
+            throw new IllegalArgumentException("Вы некорректно указали информацию о стипендии студента");
         }
     }
 
@@ -107,7 +107,7 @@ public class Student extends Person{
     }
 
     public void setHasScholarship(String hasScholarship) {
-        validateSchoolarship(hasScholarship);
+        validateScholarship(hasScholarship);
         this._hasScholarship = hasScholarship.equalsIgnoreCase("да");
     }
 }

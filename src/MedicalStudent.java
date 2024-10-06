@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.math.BigDecimal;
 public class MedicalStudent extends Student {
     private String _specialization; // специализация (хирург, терапевт и т.д.)
@@ -18,69 +17,102 @@ public class MedicalStudent extends Student {
 
     public MedicalStudent(String fullname, String gender, int age, String countryofbirth, String phonenumber,
                           String studentID, int yearofstudy, int absences, BigDecimal gpa, String hasScholarship,
-                          String specialization, String studytype, boolean hasaccesstopractice, int hoursofpractice,
-                          boolean hasemergencyexperience) {
-        super(fullname, gender, age, countryofbirth, phonenumber, studentID, yearofstudy, absences, gpa, hasScholarship);
+                          String specialization, String studytype, String hasaccesstopractice, int hoursofpractice,
+                          String hasemergencyexperience) {
+        super(fullname, gender, age, countryofbirth, phonenumber, studentID,
+                yearofstudy, absences, gpa, hasScholarship);
+        validateSpecialization(specialization);
+        validateAccesstopractice(hasaccesstopractice);
+        validateEmergencyexperience(hasemergencyexperience);
+        validateHoursofpractice(hoursofpractice);
+        validateStudytype(studytype);
         this._specialization = specialization;
         this._studytype = studytype;
-        this._hasaccesstopractice = hasaccesstopractice;
+        this._hasaccesstopractice = hasaccesstopractice.equalsIgnoreCase("да");
         this._hoursofpractice = hoursofpractice;
-        this._hasemergencyexperience = hasemergencyexperience;
+        this._hasemergencyexperience = hasemergencyexperience.equalsIgnoreCase("да");
     }
 
-    public String get_specialization() {
+    public void validateAccesstopractice(String hasaccesstopractice) {
+        if (hasaccesstopractice.isEmpty() || !hasaccesstopractice.toLowerCase().matches("^(да|нет)$")) {
+            throw new IllegalArgumentException("Вы некорректно указали информацию о наличии доступа" +
+                    " студента к врачебной практике");
+        }
+    }
+
+    public void validateEmergencyexperience(String hasemergencyexperience) {
+        if (hasemergencyexperience.isEmpty() || !hasemergencyexperience.toLowerCase().matches("^(да|нет)$")) {
+            throw new IllegalArgumentException("Вы некорректно указали информацию о наличии опыта" +
+                    " студента при работе в экстренных ситуациях");
+        }
+    }
+
+    public void validateSpecialization(String specialization) {
+        if (specialization.isEmpty() || !specialization.matches("^[А-Яа-яЁё]+$")) {
+            throw new IllegalArgumentException("Вы ввели некорректную специализацию");
+        }
+    }
+
+    public void validateStudytype(String studytype) {
+        if (studytype.isEmpty() || !studytype.matches("^(теоретик|практик)$")) {
+            throw new IllegalArgumentException("Вы ввели некорректный тип обучения (теоретик или практик)");
+        }
+    }
+
+    public void validateHoursofpractice(int hours) {
+        if (hours < 0) {
+            throw new IllegalArgumentException("Вы ввели некорректное количество часов практики");
+        }
+    }
+
+
+
+    public String getSpecialization() {
         return _specialization;
     }
 
-    public void set_specialization(String _specialization) {
-        this._specialization = _specialization;
+    public void setSpecialization(String specialization) {
+        validateSpecialization(specialization);
+        this._specialization = specialization;
     }
 
 
-    public String get_studytype() {
+    public String getStudytype() {
         return _studytype;
     }
 
-    public void set_studytype(String _studytype) {
-        this._studytype = _studytype;
+    public void setStudytype(String studytype) {
+        validateStudytype(studytype);
+        this._studytype = studytype;
     }
 
 
-    public boolean is_hasaccesstopractice() {
+    public boolean isHasaccesstopractice() {
         return _hasaccesstopractice;
     }
 
-    public void set_hasaccesstopractice(boolean _hasaccesstopractice) {
-        this._hasaccesstopractice = _hasaccesstopractice;
+    public void setHasaccesstopractice(String hasaccesstopractice) {
+        validateAccesstopractice(hasaccesstopractice);
+        this._hasaccesstopractice = hasaccesstopractice.equalsIgnoreCase("да");
     }
 
 
-    public int get_hoursofpractice() {
+    public int getHoursofpractice() {
         return _hoursofpractice;
     }
 
-    public void set_hoursofpractice(int _hoursofpractice) {
-        this._hoursofpractice = _hoursofpractice;
+    public void setHoursofpractice(int hoursofpractice) {
+        validateHoursofpractice(hoursofpractice);
+        this._hoursofpractice = hoursofpractice;
     }
 
 
-    public boolean is_hasemergencyexperience() {
+    public boolean isHasemergencyexperience() {
         return _hasemergencyexperience;
     }
 
-    public void set_hasemergencyexperience(boolean _hasemergencyexperience) {
-        this._hasemergencyexperience = _hasemergencyexperience;
-    }
-
-    @Override
-    public ArrayList<String> getInfo() {
-        ArrayList<String> info = super.getInfo();
-        info.add("Medical Student");
-        info.add("Specialization: " + _specialization);
-        info.add("Study Type: " + _studytype);
-        info.add("Access to Practice: " + (_hasaccesstopractice ? "Yes" : "No"));
-        info.add("Hours of Practice: " + _hoursofpractice);
-        info.add("Emergency Experience: " + (_hasemergencyexperience ? "Yes" : "No"));
-        return info;
+    public void setHasemergencyexperience(String hasemergencyexperience) {
+        validateEmergencyexperience(hasemergencyexperience);
+        this._hasemergencyexperience = hasemergencyexperience.equalsIgnoreCase("да");
     }
 }

@@ -17,7 +17,7 @@ public class StudentsList {
         if(listofstudents.isEmpty()){
             return null;
         }
-        BigDecimal max = listofstudents.getFirst().getGpa();
+        BigDecimal max = listofstudents.get(0).getGpa();
         for(int i=1;i< listofstudents.size();i++){
             if(listofstudents.get(i).getGpa().compareTo(max) > 0){
                 max = listofstudents.get(i).getGpa();

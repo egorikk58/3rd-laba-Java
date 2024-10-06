@@ -1,84 +1,113 @@
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 public class EngineeringStudent extends Student {
-
-    private String _programmingLanguage; // язык программирования
-    private boolean _wearsGlasses; // носит ли очки
-    private String _laptopModel; // модель ноутбука
-    private boolean _isNerd; // ботан или нет
-    private String _preferredTechnology; // предпочтительная технология
+    private String _engineeringField; // инженерное направление (механика, электроника, строительная инженерия и т.д.)
+    private String _projectSpecialization; // специализация на типах проектов (строительные, программные, промышленные и т.д.)
+    private String _finalProjectTopic; // тема итогового проекта
+    private int _hoursOfLabWork; // количество часов лабораторной работы
+    private boolean _hasInternshipExperience; // наличие опыта стажировки
 
     public EngineeringStudent() {
         super();
-        _programmingLanguage = null;
-        _wearsGlasses = false;
-        _laptopModel = null;
-        _isNerd = false;
-        _preferredTechnology = null;
+        _engineeringField = null;
+        _projectSpecialization = null;
+        _finalProjectTopic = null;
+        _hoursOfLabWork = 0;
+        _hasInternshipExperience = false;
     }
 
     public EngineeringStudent(String fullname, String gender, int age, String countryofbirth, String phonenumber,
                               String studentID, int yearofstudy, int absences, BigDecimal gpa, String hasScholarship,
-                              String programmingLanguage, boolean wearsGlasses, String laptopModel,
-                              boolean isNerd, String preferredTechnology) {
-        super(fullname, gender, age, countryofbirth, phonenumber, studentID, yearofstudy, absences, gpa, hasScholarship);
-        this._programmingLanguage = programmingLanguage;
-        this._wearsGlasses = wearsGlasses;
-        this._laptopModel = laptopModel;
-        this._isNerd = isNerd;
-        this._preferredTechnology = preferredTechnology;
+                              String engineeringField, String projectSpecialization, String finalProjectTopic,
+                              int hoursOfLabWork, String hasInternshipExperience) {
+        super(fullname, gender, age, countryofbirth, phonenumber, studentID,
+                yearofstudy, absences, gpa, hasScholarship);
+        validateEngineeringField(engineeringField);
+        validateProjectSpecialization(projectSpecialization);
+        validateFinalProjectTopic(finalProjectTopic);
+        validateHoursOfLabWork(hoursOfLabWork);
+        validateInternshipExperience(hasInternshipExperience);
+        this._engineeringField = engineeringField;
+        this._projectSpecialization = projectSpecialization;
+        this._finalProjectTopic = finalProjectTopic;
+        this._hoursOfLabWork = hoursOfLabWork;
+        this._hasInternshipExperience = hasInternshipExperience.equalsIgnoreCase("да");
     }
 
-    public String getProgrammingLanguage() {
-        return _programmingLanguage;
+    public void validateEngineeringField(String engineeringField) {
+        if (engineeringField.isEmpty() || !engineeringField.matches("^[А-Яа-яЁё\\s]+$")) {
+            throw new IllegalArgumentException("Вы ввели некорректное инженерное направление");
+        }
     }
 
-    public void setProgrammingLanguage(String programmingLanguage) {
-        this._programmingLanguage = programmingLanguage;
+    public void validateProjectSpecialization(String projectSpecialization) {
+        if (projectSpecialization.isEmpty() ||
+                !projectSpecialization.matches("^(строительные|программные|промышленные|электротехнические)$")) {
+            throw new IllegalArgumentException("Вы ввели некорректную специализацию на типах проектов");
+        }
     }
 
-    public boolean isWearsGlasses() {
-        return _wearsGlasses;
+    public void validateFinalProjectTopic(String finalProjectTopic) {
+        if (finalProjectTopic.isEmpty() || !finalProjectTopic.matches("^[А-Яа-яЁё\\s]+$")) {
+            throw new IllegalArgumentException("Вы ввели некорректную тему выпускного проекта");
+        }
     }
 
-    public void setWearsGlasses(boolean wearsGlasses) {
-        this._wearsGlasses = wearsGlasses;
+    public void validateHoursOfLabWork(int hoursOfLabWork) {
+        if (hoursOfLabWork < 0) {
+            throw new IllegalArgumentException("Вы ввели некорректное число часов лабораторной работы");
+        }
     }
 
-    public String getLaptopModel() {
-        return _laptopModel;
+    public void validateInternshipExperience(String hasInternshipExperience) {
+        if (hasInternshipExperience.isEmpty() || !hasInternshipExperience.toLowerCase().matches("^(да|нет)$")) {
+            throw new IllegalArgumentException("Вы некорректно указали наличие опыта стажировки");
+        }
     }
 
-    public void setLaptopModel(String laptopModel) {
-        this._laptopModel = laptopModel;
+
+    public String getEngineeringField() {
+        return _engineeringField;
     }
 
-    public boolean isNerd() {
-        return _isNerd;
+    public void setEngineeringField(String engineeringField) {
+        validateEngineeringField(engineeringField);
+        this._engineeringField = engineeringField;
     }
 
-    public void setNerd(boolean isNerd) {
-        this._isNerd = isNerd;
+    public String getProjectSpecialization() {
+        return _projectSpecialization;
     }
 
-    public String getPreferredTechnology() {
-        return _preferredTechnology;
+    public void setProjectSpecialization(String projectSpecialization) {
+        validateProjectSpecialization(projectSpecialization);
+        this._projectSpecialization = projectSpecialization;
     }
 
-    public void setPreferredTechnology(String preferredTechnology) {
-        this._preferredTechnology = preferredTechnology;
+    public String getFinalProjectTopic() {
+        return _finalProjectTopic;
     }
 
-    @Override
-    public ArrayList<String> getInfo() {
-        ArrayList<String> info = super.getInfo();
-        info.add("Engineering Student");
-        info.add("Programming Language: " + _programmingLanguage);
-        info.add("Wears Glasses: " + (_wearsGlasses ? "Yes" : "No"));
-        info.add("Laptop Model: " + _laptopModel);
-        info.add("Is Nerd: " + (_isNerd ? "Yes" : "No"));
-        info.add("Preferred Technology: " + _preferredTechnology);
-        return info;
+    public void setFinalProjectTopic(String finalProjectTopic) {
+        validateFinalProjectTopic(finalProjectTopic);
+        this._finalProjectTopic = finalProjectTopic;
+    }
+
+    public int getHoursOfLabWork() {
+        return _hoursOfLabWork;
+    }
+
+    public void setHoursOfLabWork(int hoursOfLabWork) {
+        validateHoursOfLabWork(hoursOfLabWork);
+        this._hoursOfLabWork = hoursOfLabWork;
+    }
+
+    public boolean isHasInternshipExperience() {
+        return _hasInternshipExperience;
+    }
+
+    public void setHasInternshipExperience(String hasInternshipExperience) {
+        validateInternshipExperience(hasInternshipExperience);
+        this._hasInternshipExperience = hasInternshipExperience.equalsIgnoreCase("да");
     }
 }

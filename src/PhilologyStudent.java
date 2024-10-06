@@ -1,57 +1,96 @@
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 public class PhilologyStudent extends Student {
-
-    private String _specialization; // специализация (лингвистика, литература и т.д.)
-    private String _favoriteAuthor; // любимый автор
-    private String _languageOfStudy; // изучаемый язык
-    private String _thesisTopic; // тема диплома
-    private String _researchInterests; // исследовательские интересы
+    private String _studiedLanguage; // изучаемый язык (латинский, древнегреческий и т.д.)
+    private String _literarySpecialization; // литературная специализация (эпоха, жанр и т.д.)
+    private String _textSpecialization; // специализация на типах текстов (художественные, технические и т.д.)
+    private String _thesisTopic; // тема итоговой работы
+    private boolean _hasRareLanguageKnowledge; // наличие знаний редких или мёртвых языков
 
     public PhilologyStudent() {
         super();
-        _specialization = null;
-        _favoriteAuthor = null;
-        _languageOfStudy = null;
+        _studiedLanguage = null;
+        _literarySpecialization = null;
+        _textSpecialization = null;
         _thesisTopic = null;
-        _researchInterests = null;
+        _hasRareLanguageKnowledge = false;
     }
 
     public PhilologyStudent(String fullname, String gender, int age, String countryofbirth, String phonenumber,
                             String studentID, int yearofstudy, int absences, BigDecimal gpa, String hasScholarship,
-                            String specialization, String favoriteAuthor, String languageOfStudy,
-                            String thesisTopic, String researchInterests) {
-        super(fullname, gender, age, countryofbirth, phonenumber, studentID, yearofstudy, absences, gpa, hasScholarship);
-        this._specialization = specialization;
-        this._favoriteAuthor = favoriteAuthor;
-        this._languageOfStudy = languageOfStudy;
+                            String studiedLanguage, String literarySpecialization, String textSpecialization,
+                            String thesisTopic, String hasRareLanguageKnowledge) {
+        super(fullname, gender, age, countryofbirth, phonenumber, studentID,
+                yearofstudy, absences, gpa, hasScholarship);
+        validateStudiedLanguage(studiedLanguage);
+        validateLiterarySpecialization(literarySpecialization);
+        validateTextSpecialization(textSpecialization);
+        validateThesisTopic(thesisTopic);
+        validateRareLanguageKnowledge(hasRareLanguageKnowledge);
+        this._studiedLanguage = studiedLanguage;
+        this._literarySpecialization = literarySpecialization;
+        this._textSpecialization = textSpecialization;
         this._thesisTopic = thesisTopic;
-        this._researchInterests = researchInterests;
+        this._hasRareLanguageKnowledge = hasRareLanguageKnowledge.equalsIgnoreCase("да");
     }
 
-    public String getSpecialization() {
-        return _specialization;
+    public void validateStudiedLanguage(String studiedLanguage) {
+        if (studiedLanguage.isEmpty() || !studiedLanguage.matches("^[А-Яа-яЁё]+$")) {
+            throw new IllegalArgumentException("Вы ввели некорректный изучаемый язык");
+        }
     }
 
-    public void setSpecialization(String specialization) {
-        this._specialization = specialization;
+    public void validateLiterarySpecialization(String literarySpecialization) {
+        if (literarySpecialization.isEmpty() || !literarySpecialization.matches("^[А-Яа-яЁё\\s]+$")) {
+            throw new IllegalArgumentException("Вы ввели некорректную литературную специализацию");
+        }
     }
 
-    public String getFavoriteAuthor() {
-        return _favoriteAuthor;
+    public void validateTextSpecialization(String textSpecialization) {
+        if (textSpecialization.isEmpty() ||
+                !textSpecialization.matches("^(художественные|технические|научные|публицистические)$")) {
+            throw new IllegalArgumentException("Вы ввели некорректную специализацию на типах текстов");
+        }
     }
 
-    public void setFavoriteAuthor(String favoriteAuthor) {
-        this._favoriteAuthor = favoriteAuthor;
+    public void validateThesisTopic(String thesisTopic) {
+        if (thesisTopic.isEmpty() || !thesisTopic.matches("^[А-Яа-яЁё\\s]+$")) {
+            throw new IllegalArgumentException("Тема итоговой работы не может быть пустой");
+        }
     }
 
-    public String getLanguageOfStudy() {
-        return _languageOfStudy;
+    public void validateRareLanguageKnowledge(String hasRareLanguageKnowledge) {
+        if (hasRareLanguageKnowledge.isEmpty() || !hasRareLanguageKnowledge.toLowerCase().matches("^(да|нет)$")) {
+            throw new IllegalArgumentException("Вы некорректно указали наличие знаний редких языков");
+        }
     }
 
-    public void setLanguageOfStudy(String languageOfStudy) {
-        this._languageOfStudy = languageOfStudy;
+
+    public String getStudiedLanguage() {
+        return _studiedLanguage;
+    }
+
+    public void setStudiedLanguage(String studiedLanguage) {
+        validateStudiedLanguage(studiedLanguage);
+        this._studiedLanguage = studiedLanguage;
+    }
+
+    public String getLiterarySpecialization() {
+        return _literarySpecialization;
+    }
+
+    public void setLiterarySpecialization(String literarySpecialization) {
+        validateLiterarySpecialization(literarySpecialization);
+        this._literarySpecialization = literarySpecialization;
+    }
+
+    public String getTextSpecialization() {
+        return _textSpecialization;
+    }
+
+    public void setTextSpecialization(String textSpecialization) {
+        validateTextSpecialization(textSpecialization);
+        this._textSpecialization = textSpecialization;
     }
 
     public String getThesisTopic() {
@@ -59,26 +98,16 @@ public class PhilologyStudent extends Student {
     }
 
     public void setThesisTopic(String thesisTopic) {
+        validateThesisTopic(thesisTopic);
         this._thesisTopic = thesisTopic;
     }
 
-    public String getResearchInterests() {
-        return _researchInterests;
+    public boolean isHasRareLanguageKnowledge() {
+        return _hasRareLanguageKnowledge;
     }
 
-    public void setResearchInterests(String researchInterests) {
-        this._researchInterests = researchInterests;
-    }
-
-    @Override
-    public ArrayList<String> getInfo() {
-        ArrayList<String> info = super.getInfo();
-        info.add("Philology Student");
-        info.add("Specialization: " + _specialization);
-        info.add("Favorite Author: " + _favoriteAuthor);
-        info.add("Language of Study: " + _languageOfStudy);
-        info.add("Thesis Topic: " + _thesisTopic);
-        info.add("Research Interests: " + _researchInterests);
-        return info;
+    public void setHasRareLanguageKnowledge(String hasRareLanguageKnowledge) {
+        validateRareLanguageKnowledge(hasRareLanguageKnowledge);
+        this._hasRareLanguageKnowledge = hasRareLanguageKnowledge.equalsIgnoreCase("да");
     }
 }
