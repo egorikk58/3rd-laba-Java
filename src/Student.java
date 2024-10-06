@@ -1,5 +1,4 @@
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 public class Student extends Person{
 
@@ -110,16 +109,5 @@ public class Student extends Person{
     public void setHasScholarship(String hasScholarship) {
         validateSchoolarship(hasScholarship);
         this._hasScholarship = hasScholarship.equalsIgnoreCase("да");
-    }
-
-    @Override
-    public ArrayList<String> getInfo(){
-        ArrayList<String> studentinfo = super.getInfo();
-        studentinfo.add(_studentID);
-        studentinfo.add(String.valueOf(_yearofstudy));
-        studentinfo.add(String.valueOf(_absences));
-        studentinfo.add(String.valueOf(_gpa));
-        studentinfo.add(_hasScholarship ?"да":"нет");
-        return studentinfo;
     }
 }

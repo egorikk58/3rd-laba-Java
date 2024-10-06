@@ -10,4 +10,5 @@ public class MedicalStudent extends Student {
 
     private boolean _hasemergencyexperience; //имеет ли опыт работы в экстренных ситуациях
 
+
 }
