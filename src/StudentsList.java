@@ -56,4 +56,23 @@ public class StudentsList {
         }
         return null;
     }
+    
+    public void sortStudents() {
+        boolean swapped;
+        for (int i = 0; i < listofstudents.size() - 1; i++) {
+            swapped = false;
+            for (int j = 0; j < listofstudents.size() - 1 - i; j++) {
+                if (listofstudents.get(j).getFullname()
+                        .compareTo(listofstudents.get(j + 1).getFullname()) > 0) {
+                    Student tmp = listofstudents.get(j);
+                    listofstudents.set(j, listofstudents.get(j + 1));
+                    listofstudents.set(j + 1, tmp);
+                    swapped = true;
+                }
+            }
+            if (!swapped){
+                break;
+            }
+        }
+    }
 }
