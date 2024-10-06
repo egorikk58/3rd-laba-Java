@@ -27,11 +27,11 @@ public class StudentsList {
     }
 
     private BigDecimal countAverageAbsences(){
-        double count = 0;
+        BigDecimal count = BigDecimal.ZERO;
         for(Student i:listofstudents){
-            count += i.getAbsences();
+            count = count.add(new BigDecimal(i.getAbsences()));
         }
-        return new BigDecimal(count/listofstudents.size());
+        return count.divide(new BigDecimal(listofstudents.size()));
     }
 
     public int countLessAvgAbsences(){
