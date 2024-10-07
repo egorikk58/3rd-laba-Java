@@ -8,12 +8,16 @@ public class UserInterface {
     private static Scanner _in;
 
     private StudentsList _sl;
-
+    /**
+     * Конструктор по умолчанию, инициализирует сканер и список студентов.
+     */
     public UserInterface(){
         _in = new Scanner(System.in);
         _sl = new StudentsList();
     }
-
+    /**
+     * Выводит информацию о лабораторной работе, исполнителях и задании.
+     */
     public void printInfo(){
         System.out.println("Лабораторная работа 3");
         System.out.println("Выполнили: ст. группы 23ВП2 Андреев Е.Е. Костиневич А.В.");
@@ -25,7 +29,9 @@ public class UserInterface {
         System.out.println("-организовать поиск по ФИО студента, исправление одного из полей и" +
                 " полной информации о студенте после редактирования.");
     }
-
+    /**
+     * Выводит список доступных команд для пользователя.
+     */
     public void showCommands(){
         System.out.println("Список команд:");
         System.out.println("'1' - добавить студента");
@@ -37,7 +43,14 @@ public class UserInterface {
         System.out.println("Для выхода из программы введите любой символ," +
                 "не являющийся командой");
     }
-
+    /**
+     * Запрашивает у пользователя ввод значения типа BigDecimal с валидацией.
+     *
+     * @param prompt      Сообщение для запроса ввода
+     * @param validateFunc Функция для валидации введённого значения
+     * @param first       Указывает, является ли это первым вводом
+     * @return Введённое значение типа BigDecimal
+     */
     private static BigDecimal
     validateInputBigDecimal(String prompt, Consumer<BigDecimal> validateFunc,
                             boolean first){
@@ -63,7 +76,14 @@ public class UserInterface {
         }
         return n;
     }
-
+    /**
+     * Запрашивает у пользователя ввод строки с валидацией.
+     *
+     * @param prompt      Сообщение для запроса ввода
+     * @param validateFunc Функция для валидации введённого значения
+     * @param first       Указывает, является ли это первым вводом
+     * @return Введённое значение типа String
+     */
     private static String
     validateInputString(String prompt, Consumer<String> validateFunc,
                         boolean first){
@@ -84,7 +104,14 @@ public class UserInterface {
         }
         return input;
     }
-
+    /**
+     * Запрашивает у пользователя ввод целого числа с валидацией.
+     *
+     * @param prompt      Сообщение для запроса ввода
+     * @param validateFunc Функция для валидации введённого значения
+     * @param first       Указывает, является ли это первым вводом
+     * @return Введённое значение типа int
+     */
     private static int
     validateInputInt(String prompt, Consumer<Integer> validateFunc, boolean first){
         String input = "";
@@ -108,7 +135,9 @@ public class UserInterface {
         }
         return n;
     }
-
+    /**
+     * Запрашивает у пользователя ввод команды и обрабатывает её.
+     */
     public void getCommand(){
         System.out.println("Выберите команду");
         int n = 0;
@@ -123,7 +152,11 @@ public class UserInterface {
         }
     }
 
-
+    /**
+     * Обрабатывает введённую команду.
+     *
+     * @param command номер команды
+     */
     public void processCommand(int command) {
         switch (command) {
             case 1:
@@ -593,9 +626,13 @@ public class UserInterface {
         }
     }
 
-    public void run(){
-        printInfo();
-        showCommands();
-        getCommand();
+    /**
+     * Запускает интерфейс пользователя.
+     * Вызывает методы для отображения информации, команд и обработки ввода пользователя.
+     */
+    public void run() {
+        printInfo();    // Выводит информацию о программе или пользователе
+        showCommands(); // Отображает доступные команды для пользователя
+        getCommand();   // Запрашивает и обрабатывает ввод команды от пользователя
     }
 }
