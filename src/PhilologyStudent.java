@@ -1,10 +1,15 @@
 import java.math.BigDecimal;
 
 public class PhilologyStudent extends Student {
+
     private String _studiedLanguage; // изучаемый язык (латинский, древнегреческий и т.д.)
+
     private String _literarySpecialization; // литературная специализация (эпоха, жанр и т.д.)
+
     private String _textSpecialization; // специализация на типах текстов (художественные, технические и т.д.)
+
     private String _thesisTopic; // тема итоговой работы
+
     private boolean _hasRareLanguageKnowledge; // наличие знаний редких или мёртвых языков
 
     public PhilologyStudent() {
@@ -34,33 +39,32 @@ public class PhilologyStudent extends Student {
         this._hasRareLanguageKnowledge = hasRareLanguageKnowledge.equalsIgnoreCase("да");
     }
 
-    public void validateStudiedLanguage(String studiedLanguage) {
-        if (studiedLanguage.isEmpty() || !studiedLanguage.matches("^[А-Яа-яЁё]+$")) {
+    public static void validateStudiedLanguage(String studiedLanguage) {
+        if (!studiedLanguage.matches("^[А-Яа-яЁё]+$")) {
             throw new IllegalArgumentException("Вы ввели некорректный изучаемый язык");
         }
     }
 
-    public void validateLiterarySpecialization(String literarySpecialization) {
-        if (literarySpecialization.isEmpty() || !literarySpecialization.matches("^[А-Яа-яЁё\\s]+$")) {
+    public static void validateLiterarySpecialization(String literarySpecialization) {
+        if (!literarySpecialization.matches("^[А-Яа-яЁё\\s]+$")) {
             throw new IllegalArgumentException("Вы ввели некорректную литературную специализацию");
         }
     }
 
-    public void validateTextSpecialization(String textSpecialization) {
-        if (textSpecialization.isEmpty() ||
-                !textSpecialization.matches("^(художественные|технические|научные|публицистические)$")) {
+    public static void validateTextSpecialization(String textSpecialization) {
+        if (!textSpecialization.matches("^(художественные|технические|научные|публицистические)$")) {
             throw new IllegalArgumentException("Вы ввели некорректную специализацию на типах текстов");
         }
     }
 
-    public void validateThesisTopic(String thesisTopic) {
-        if (thesisTopic.isEmpty() || !thesisTopic.matches("^[А-Яа-яЁё\\s]+$")) {
+    public static void validateThesisTopic(String thesisTopic) {
+        if (!thesisTopic.matches("^[А-Яа-яЁё\\s]+$")) {
             throw new IllegalArgumentException("Тема итоговой работы не может быть пустой");
         }
     }
 
-    public void validateRareLanguageKnowledge(String hasRareLanguageKnowledge) {
-        if (hasRareLanguageKnowledge.isEmpty() || !hasRareLanguageKnowledge.toLowerCase().matches("^(да|нет)$")) {
+    public static void validateRareLanguageKnowledge(String hasRareLanguageKnowledge) {
+        if (!hasRareLanguageKnowledge.toLowerCase().matches("^(да|нет)$")) {
             throw new IllegalArgumentException("Вы некорректно указали наличие знаний редких языков");
         }
     }
@@ -110,4 +114,15 @@ public class PhilologyStudent extends Student {
         validateRareLanguageKnowledge(hasRareLanguageKnowledge);
         this._hasRareLanguageKnowledge = hasRareLanguageKnowledge.equalsIgnoreCase("да");
     }
+
+    @Override
+    public String getInfo() {
+        return super.getInfo() +
+                "Изучаемый язык: " + _studiedLanguage + "\n" +
+                "Литературная специализация: " + _literarySpecialization + "\n" +
+                "Специализация на типах текстов: " + _textSpecialization + "\n" +
+                "Тема итоговой работы: " + _thesisTopic + "\n" +
+                "Знания редких или мёртвых языков: " + (_hasRareLanguageKnowledge ? "да" : "нет");
+    }
+
 }

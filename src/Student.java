@@ -88,7 +88,7 @@ public class Student extends Person{
         return _absences;
     }
 
-    public void set_absences(int absences) {
+    public void setAbsences(int absences) {
         validateAbsences(absences);
         this._absences = absences;
     }
@@ -109,5 +109,15 @@ public class Student extends Person{
     public void setHasScholarship(String hasScholarship) {
         validateScholarship(hasScholarship);
         this._hasScholarship = hasScholarship.equalsIgnoreCase("да");
+    }
+
+    @Override
+    public String getInfo(){
+        return super.getInfo() +
+                "Номер зачетной книжки: " + _studentID + "\n" +
+                "Курс: " + _yearofstudy + "\n" +
+                "Количество пропусков: " + _absences + "\n" +
+                "Средний балл: " + _gpa + "\n" +
+                "Есть ли степендия: " + (_hasScholarship?"да":"нет") + "\n";
     }
 }

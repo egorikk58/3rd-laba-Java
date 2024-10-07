@@ -1,9 +1,14 @@
 import java.math.BigDecimal;
 public class MedicalStudent extends Student {
+
     private String _specialization; // специализация (хирург, терапевт и т.д.)
+
     private String _studytype; // теоретик или практик
+
     private boolean _hasaccesstopractice; // имеет ли доступ к практике (находиться на операциях и т.д.)
+
     private int _hoursofpractice; // общее время в часах работы в больнице
+
     private boolean _hasemergencyexperience; // имеет ли опыт работы в экстренных ситуациях
 
     public MedicalStudent() {
@@ -33,39 +38,38 @@ public class MedicalStudent extends Student {
         this._hasemergencyexperience = hasemergencyexperience.equalsIgnoreCase("да");
     }
 
-    public void validateAccesstopractice(String hasaccesstopractice) {
-        if (hasaccesstopractice.isEmpty() || !hasaccesstopractice.toLowerCase().matches("^(да|нет)$")) {
+
+    public static void validateAccesstopractice(String hasaccesstopractice) {
+        if (!hasaccesstopractice.toLowerCase().matches("^(да|нет)$")) {
             throw new IllegalArgumentException("Вы некорректно указали информацию о наличии доступа" +
                     " студента к врачебной практике");
         }
     }
 
-    public void validateEmergencyexperience(String hasemergencyexperience) {
-        if (hasemergencyexperience.isEmpty() || !hasemergencyexperience.toLowerCase().matches("^(да|нет)$")) {
+    public static void validateEmergencyexperience(String hasemergencyexperience) {
+        if (!hasemergencyexperience.toLowerCase().matches("^(да|нет)$")) {
             throw new IllegalArgumentException("Вы некорректно указали информацию о наличии опыта" +
                     " студента при работе в экстренных ситуациях");
         }
     }
 
-    public void validateSpecialization(String specialization) {
-        if (specialization.isEmpty() || !specialization.matches("^[А-Яа-яЁё]+$")) {
+    public static void validateSpecialization(String specialization) {
+        if (!specialization.matches("^[А-Яа-яЁё]+$")) {
             throw new IllegalArgumentException("Вы ввели некорректную специализацию");
         }
     }
 
-    public void validateStudytype(String studytype) {
-        if (studytype.isEmpty() || !studytype.matches("^(теоретик|практик)$")) {
+    public static void validateStudytype(String studytype) {
+        if (!studytype.matches("^(теоретик|практик)$")) {
             throw new IllegalArgumentException("Вы ввели некорректный тип обучения (теоретик или практик)");
         }
     }
 
-    public void validateHoursofpractice(int hours) {
+    public static void validateHoursofpractice(int hours) {
         if (hours < 0) {
             throw new IllegalArgumentException("Вы ввели некорректное количество часов практики");
         }
     }
-
-
 
     public String getSpecialization() {
         return _specialization;
@@ -115,4 +119,15 @@ public class MedicalStudent extends Student {
         validateEmergencyexperience(hasemergencyexperience);
         this._hasemergencyexperience = hasemergencyexperience.equalsIgnoreCase("да");
     }
+
+    @Override
+    public String getInfo() {
+        return super.getInfo() +
+                "Специализация: " + _specialization + "\n" +
+                "Тип обучения: " + _studytype + "\n" +
+                "Доступ к практике: " + (_hasaccesstopractice ? "да" : "нет") + "\n" +
+                "Количество часов практики: " + _hoursofpractice + "\n" +
+                "Опыт работы в экстренных ситуациях: " + (_hasemergencyexperience ? "да" : "нет");
+    }
+
 }

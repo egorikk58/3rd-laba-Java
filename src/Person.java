@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public abstract class Person {
 
     protected String _fullname;
@@ -108,5 +105,13 @@ public abstract class Person {
 
     public String getPhonenumber() {
         return _phonenumber;
+    }
+
+    public String getInfo(){
+        return "ФИО: " + _fullname + "\n" +
+                "Пол: " + _gender + "\n" +
+                "Возраст: " + _age + "\n" +
+                "Страна рождения: " + _countryofbirth + "\n" +
+                "Номер телефона: " + _phonenumber + "\n";
     }
 }

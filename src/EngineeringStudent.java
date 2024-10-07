@@ -1,10 +1,15 @@
 import java.math.BigDecimal;
 
 public class EngineeringStudent extends Student {
+
     private String _engineeringField; // инженерное направление (механика, электроника, строительная инженерия и т.д.)
+
     private String _projectSpecialization; // специализация на типах проектов (строительные, программные, промышленные и т.д.)
+
     private String _finalProjectTopic; // тема итогового проекта
+
     private int _hoursOfLabWork; // количество часов лабораторной работы
+
     private boolean _hasInternshipExperience; // наличие опыта стажировки
 
     public EngineeringStudent() {
@@ -34,33 +39,32 @@ public class EngineeringStudent extends Student {
         this._hasInternshipExperience = hasInternshipExperience.equalsIgnoreCase("да");
     }
 
-    public void validateEngineeringField(String engineeringField) {
-        if (engineeringField.isEmpty() || !engineeringField.matches("^[А-Яа-яЁё\\s]+$")) {
+    public static void validateEngineeringField(String engineeringField) {
+        if (!engineeringField.matches("^[А-Яа-яЁё\\s]+$")) {
             throw new IllegalArgumentException("Вы ввели некорректное инженерное направление");
         }
     }
 
-    public void validateProjectSpecialization(String projectSpecialization) {
-        if (projectSpecialization.isEmpty() ||
-                !projectSpecialization.matches("^(строительные|программные|промышленные|электротехнические)$")) {
+    public static void validateProjectSpecialization(String projectSpecialization) {
+        if (!projectSpecialization.matches("^(строительные|программные|промышленные|электротехнические)$")) {
             throw new IllegalArgumentException("Вы ввели некорректную специализацию на типах проектов");
         }
     }
 
-    public void validateFinalProjectTopic(String finalProjectTopic) {
-        if (finalProjectTopic.isEmpty() || !finalProjectTopic.matches("^[А-Яа-яЁё\\s]+$")) {
+    public static void validateFinalProjectTopic(String finalProjectTopic) {
+        if (!finalProjectTopic.matches("^[А-Яа-яЁё\\s]+$")) {
             throw new IllegalArgumentException("Вы ввели некорректную тему выпускного проекта");
         }
     }
 
-    public void validateHoursOfLabWork(int hoursOfLabWork) {
+    public static void validateHoursOfLabWork(int hoursOfLabWork) {
         if (hoursOfLabWork < 0) {
             throw new IllegalArgumentException("Вы ввели некорректное число часов лабораторной работы");
         }
     }
 
-    public void validateInternshipExperience(String hasInternshipExperience) {
-        if (hasInternshipExperience.isEmpty() || !hasInternshipExperience.toLowerCase().matches("^(да|нет)$")) {
+    public static void validateInternshipExperience(String hasInternshipExperience) {
+        if (!hasInternshipExperience.toLowerCase().matches("^(да|нет)$")) {
             throw new IllegalArgumentException("Вы некорректно указали наличие опыта стажировки");
         }
     }
@@ -110,4 +114,15 @@ public class EngineeringStudent extends Student {
         validateInternshipExperience(hasInternshipExperience);
         this._hasInternshipExperience = hasInternshipExperience.equalsIgnoreCase("да");
     }
+
+    @Override
+    public String getInfo() {
+        return super.getInfo() +
+                "Инженерное направление: " + _engineeringField + "\n" +
+                "Специализация на типах проектов: " + _projectSpecialization + "\n" +
+                "Тема итогового проекта: " + _finalProjectTopic + "\n" +
+                "Количество часов лабораторной работы: " + _hoursOfLabWork + "\n" +
+                "Опыт прохождения стажировки: " + (_hasInternshipExperience ? "да" : "нет");
+    }
+
 }
