@@ -44,39 +44,53 @@ public class UserInterface {
         }
     }
 
-    public void processCommand(int command){
-        switch (command){
+
+    public void processCommand(int command) {
+        switch (command) {
             case 1:
                 System.out.println("Введите ФИО");
-                String fullname;
-                while (true){
+                boolean first = false;
+                String fullname = "";
+                while (true) {
+                    fullname = _in.nextLine();
                     try {
-                        fullname = _in.nextLine();
                         Person.validateName(fullname);
                         break;
-                    }
-                    catch (IllegalArgumentException ex){
+                    } catch (IllegalArgumentException ex) {
+                        if (!first) {
+                            first = true;
+                            continue;
+                        }
                         System.out.println(ex.getMessage());
-                        System.out.println("Введите заново");
                     }
                 }
                 System.out.println("Введите пол (мужской/женский)");
                 String gender = "";
-                while (true){
+                while (true) {
+                    gender = _in.nextLine();
                     try {
-                        gender = _in.nextLine();
                         Person.validateGender(gender);
                         break;
-                    }
-                    catch (IllegalArgumentException ex){
+                    } catch (IllegalArgumentException ex) {
                         System.out.println(ex.getMessage());
-                        System.out.println("Введите заново");
                     }
                 }
+                System.out.println("Введите возраст");
+                String age = "";
+                while (true) {
+                    age = _in.nextLine();
+                    try {
+                        Person.validateAge(Integer.parseInt(age));
+                        break;
+                    } catch (NumberFormatException ex) {
+                        System.out.println("Возраст должен быть целым числом");
+                    } catch (IllegalArgumentException ex) {
+                        System.out.println(ex.getMessage());
+                    }
 
+                }
         }
     }
-
     public void run(){
         printInfo();
         showCommands();

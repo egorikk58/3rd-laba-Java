@@ -35,13 +35,13 @@ public abstract class Person {
     }
 
     public static void validateName(String fullname) {
-        if (fullname.isEmpty() || !fullname.matches("^[А-Яа-яЁё]+(\\s[А-Яа-яЁё]+){2}$")) {
+        if (!fullname.matches("^[А-Яа-яЁё]+(\\s[А-Яа-яЁё]+){2}$")) {
             throw new IllegalArgumentException("Вы ввели некорректное имя");
         }
     }
 
     public static void validateGender(String gender) {
-        if (gender.isEmpty() || !gender.toLowerCase().matches("^(мужской|женский)$")) {
+        if (!gender.toLowerCase().matches("^(мужской|женский)$")) {
             throw new IllegalArgumentException("Вы ввели неверный пол");
         }
     }
@@ -53,13 +53,13 @@ public abstract class Person {
     }
 
     public static void validateCountry(String country) {
-        if (country.isEmpty() || !country.matches("^[А-Яа-яЁё-]+(\\s[А-Яа-яЁё-]+)*$")) {
+        if (!country.matches("^[А-Яа-яЁё-]+(\\s[А-Яа-яЁё-]+)*$")) {
             throw new IllegalArgumentException("Вы ввели некорректную страну");
         }
     }
 
     public static void validatePhone(String number) {
-        if (number.isEmpty() || !number.matches("(^\\+7\\d{10}$)|(^\\+7\\(\\d{3}\\)\\d{3}-\\d{2}-\\d{2}$)|" +
+        if (!number.matches("(^\\+7\\d{10}$)|(^\\+7\\(\\d{3}\\)\\d{3}-\\d{2}-\\d{2}$)|" +
                 "(^8\\d{10}$)|(^8\\(\\d{3}\\)\\d{7}$)")) {
             throw new IllegalArgumentException("Вы ввели некорректный номер");
         }
