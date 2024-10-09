@@ -213,7 +213,7 @@ public class UserInterface {
                 System.out.println("Введите специальность (медик/инженер/филолог)");
                 String spec = "";
                 while (true){
-                    spec = _in.nextLine();
+                    spec = _in.nextLine().toLowerCase();
                     if(spec.matches("^(медик|инженер|филолог)$")){
                         break;
                     }else{

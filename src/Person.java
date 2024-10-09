@@ -71,7 +71,7 @@ public abstract class Person {
      * @throws IllegalArgumentException Если возраст некорректен.
      */
     public static void validateAge(int age) {
-        if (age <= 0 || age > 122) {
+        if (age <= 1 || age > 122) {
             throw new IllegalArgumentException("Вы ввели некорректный возраст");
         }
     }
